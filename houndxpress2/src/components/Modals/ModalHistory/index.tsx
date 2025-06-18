@@ -1,28 +1,10 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 import XIcon from "../../../assets/IMG/x-solid.svg";
-import { Guide } from "../../GuideReguister/types";
 import HistoryTable from "./HistoryTable";
 import HistoryPath from "./HistoryPath";
 import { useModalGuides } from "../../../hooks/useModalGuides";
 import { ModalHistoryContainer } from "./styles";
-//Types for this component
-export interface ModalProp {
-  modalData: string;
-  guides: Guide[];
-  setModalData: React.Dispatch<SetStateAction<string>>;
-  isOpenModal: string;
-  setIsOpenModal: React.Dispatch<SetStateAction<"Update" | "History" | "">>;
-}
-
-//Types for the customhook
-export interface ModalGuidesProps {
-  guides: Guide[];
-  modalData: string;
-  setModalData: React.Dispatch<React.SetStateAction<string>>;
-  setIsOpenModal: React.Dispatch<
-    React.SetStateAction<"" | "Update" | "History">
-  >;
-}
+import { ModalProp } from "../../../types/modals";
 
 const ModalHistory = ({
   modalData,

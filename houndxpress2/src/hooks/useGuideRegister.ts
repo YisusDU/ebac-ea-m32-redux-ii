@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "./useStoreTypes";
+import { addGuide } from "../state/guides.slice";
 import validateFields from "./useValidateFields";
-import { Guide } from "../components/GuideReguister/types";
+import { Guide } from "../types/guides";
 
-const useGuideRegister = (
-  guides: Guide[],
-  setGuides: React.Dispatch<React.SetStateAction<Guide[]>>
-) => {
+const useGuideRegister = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  //Redux dispatch:
+  const dispatch = useAppDispatch();
+  const guides = useAppSelector((state) => state.guides.guides);
 
   const handleValidate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,7 +20,7 @@ const useGuideRegister = (
     const guideNumber = (formData.get("guide__number") as string)?.trim();
 
     const existingGuide = guides.some(
-      (guide) => guide["guide__number"] === guideNumber
+      (guide: Guide) => guide["guide__number"] === guideNumber
     );
     // console.log("existingGuide", existingGuide);
 
@@ -68,8 +71,9 @@ const useGuideRegister = (
       ],
     };
 
-    //Update the Main table
-    setGuides((prev) => [...prev, guideData]);
+    //Redux dispatch:
+    dispatch(addGuide(guideData));
+
     alert("Guía registrada con éxito");
 
     //clean the form

@@ -1,7 +1,6 @@
 import React from "react";
 import Paws from "../../assets/IMG/paw-solid.svg";
 import { useGuideRegister } from "../../hooks/useGuideRegister";
-import { GuideListProps } from "./types";
 import {
   GuideRegisterContainer,
   GuideContainer,
@@ -11,11 +10,8 @@ import {
 } from "./styles";
 import { useCleanErrorOnFocus } from "../../hooks/useCleanErrorOnFocus";
 
-const GuideRegister = ({ guides, setGuides }: GuideListProps) => {
-  const { errors, handleValidate, setErrors } = useGuideRegister(
-    guides,
-    setGuides
-  );
+const GuideRegister = () => {
+  const { errors, handleValidate, setErrors } = useGuideRegister();
   const cleanErrorOnFocus = useCleanErrorOnFocus(errors, setErrors);
 
   //----Funcion para limitar el input de fecha a la fecha actual

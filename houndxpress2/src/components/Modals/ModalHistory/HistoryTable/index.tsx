@@ -1,12 +1,7 @@
 import React from "react";
-import { Guide } from "../../../GuideReguister/types";
 import useDraggTable from "../../../../hooks/useDraggTable";
 import { HistoryTableContainer } from "./styles";
-
-export interface HistoryGuide {
-  guideIndex: number;
-  currentGuide: Guide;
-}
+import { HistoryGuide } from "../../../../types/modals";
 
 const HistoryTable = ({ guideIndex, currentGuide }: HistoryGuide) => {
   //Function to dragg the table on scroll, it needs styles of overflow

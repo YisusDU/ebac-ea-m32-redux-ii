@@ -1,5 +1,5 @@
 import React from "react";
-import { HistoryGuide } from "../HistoryTable";
+import { HistoryGuide } from "../../../../types/modals";
 import Paw from "../../../../assets/IMG/paw-solid.svg";
 import {
   ModalHistoryPath,

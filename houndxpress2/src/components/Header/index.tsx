@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, forwardRef } from "react";
 import logoHeader from "../../assets/IMG/M6-imagotipo-Hound_Express/logo-Hound_Express-bg-white.png";
 import buttonShow from "../../assets/IMG/bars-solid.svg";
 import buttonHidde from "../../assets/IMG/x-solid.svg";

@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { Guide } from "../../../GuideReguister/types";
+import { Guide } from "../../../../types/guides";
 import { useUpdateForm } from "../../../../hooks/useUpdateForm";
 import {
   ModalUpdateContainer,

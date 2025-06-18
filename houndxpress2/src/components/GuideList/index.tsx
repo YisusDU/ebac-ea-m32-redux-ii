@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, SetStateAction, Children } from "react";
+import React, { SetStateAction } from "react";
 import {
   GuideListContainer,
   GuideTable,
@@ -6,22 +6,8 @@ import {
   TableData,
   TableButtonsContainer,
 } from "./styles";
+import { Guide } from "../../types/guides";
 import useDraggTable from "../../hooks/useDraggTable";
-
-//Types of the props
-interface Guide {
-  guide__number: string;
-  guide__origin: string;
-  guide__destination: string;
-  guide__recipient: string;
-  guide__stage: GuideStage[];
-}
-
-interface GuideStage {
-  guide__date: string;
-  guide__status: string;
-  guide__hour: string;
-}
 
 interface GuideListProps {
   guides: Guide[];

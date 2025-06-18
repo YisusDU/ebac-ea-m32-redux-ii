@@ -1,4 +1,4 @@
-import { ModalGuidesProps } from "../components/Modals/ModalHistory";
+import { ModalGuidesProps } from "../types/modals";
 
 const useModalGuides = ({
   guides,

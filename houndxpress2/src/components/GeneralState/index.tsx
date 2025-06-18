@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Gift from "../../assets/IMG/Animacion-beneficios-sistema-v2.gif";
-import { Guide } from "../GuideReguister/types";
+import { Guide } from "../../types/guides";
 import {
   GeneralStateContainer,
   StateContainer,
@@ -9,11 +9,11 @@ import {
   StatePicture,
 } from "./styles";
 
-interface GuideListProps {
+interface GuideProps {
   guides: Guide[];
 }
 
-const GeneralState = ({ guides }: GuideListProps) => {
+const GeneralState = ({ guides }: GuideProps) => {
   const [guideActive, setGuideActive] = useState<number>(0);
   const [guideDelivered, setGuideDelivered] = useState<number>(0);
   const [guidePending, setGuidePending] = useState<number>(0);

@@ -2,7 +2,7 @@ import React, { SetStateAction } from "react";
 import { ModalUpdateContainer } from "./styles";
 import UpdateTable from "./UpdateTable";
 import UpdateForm from "./UpdateForm";
-import { Guide } from "../../GuideReguister/types";
+import { Guide } from "../../../types/guides";
 import { useModalGuides } from "../../../hooks/useModalGuides";
 import XIcon from "../../../assets/IMG/x-solid.svg";
 
@@ -41,7 +41,11 @@ const ModalUpdate = ({
       </i>
       <h3 className="tableModal__title">Actualizar estado del envío</h3>
       <UpdateTable guideIndex={guideIndex} currentGuide={currentGuide} />
-      <UpdateForm guideIndex={guideIndex} currentGuide={currentGuide} setGuides={setGuides}/>
+      <UpdateForm
+        guideIndex={guideIndex}
+        currentGuide={currentGuide}
+        setGuides={setGuides}
+      />
     </ModalUpdateContainer>
   );
 };
