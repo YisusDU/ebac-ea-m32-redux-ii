@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GuidesState, Guide } from "./types";
-
-
+import { GuidesState } from "./types";
+import { Guide } from "../types/guides";
 
 //Global Initial State
 const initialState: GuidesState = {
@@ -92,6 +91,7 @@ const initialState: GuidesState = {
       ],
     },
   ],
+  menuDisplay: false,
 };
 
 const guidesSlice = createSlice({
@@ -99,13 +99,16 @@ const guidesSlice = createSlice({
   initialState,
   reducers: {
     addGuide: (state, action: PayloadAction<Guide>) => {
-      state.guides.push(action.payload);
+      state.guides.unshift(action.payload);
+    },
+    toggleMenu: (state, action: PayloadAction<boolean>) => {
+      state.menuDisplay = action.payload;
     },
   },
 });
 
 //Actions by name
-export const { addGuide } = guidesSlice.actions
+export const { addGuide, toggleMenu } = guidesSlice.actions;
 
 //Reducer for the store
 export default guidesSlice.reducer;

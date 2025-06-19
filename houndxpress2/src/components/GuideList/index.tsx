@@ -8,20 +8,22 @@ import {
 } from "./styles";
 import { Guide } from "../../types/guides";
 import useDraggTable from "../../hooks/useDraggTable";
+import { useAppSelector } from "../../hooks/useStoreTypes";
 
 interface GuideListProps {
-  guides: Guide[];
   setModalData: React.Dispatch<SetStateAction<string>>;
   setIsOpenModal: React.Dispatch<SetStateAction<"Update" | "History" | "">>;
 }
 
 const GuideList = ({
-  guides,
   setIsOpenModal,
   setModalData,
 }: GuideListProps) => {
   //Function to dragg the table on scroll, it needs styles of overflow
   const tableRef = useDraggTable();
+
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
 
   type ModalType = "History" | "Update";
 

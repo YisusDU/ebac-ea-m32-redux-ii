@@ -8,16 +8,17 @@ import {
   StateGroup,
   StatePicture,
 } from "./styles";
+import { useAppSelector } from "../../hooks/useStoreTypes";
 
-interface GuideProps {
-  guides: Guide[];
-}
-
-const GeneralState = ({ guides }: GuideProps) => {
+const GeneralState = () => {
+  //Local state
   const [guideActive, setGuideActive] = useState<number>(0);
   const [guideDelivered, setGuideDelivered] = useState<number>(0);
   const [guidePending, setGuidePending] = useState<number>(0);
   const [guideTransit, setGuideTransit] = useState<number>(0);
+
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
 
   //AutoUpdate the general numbers
   useEffect(() => {

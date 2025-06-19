@@ -3,6 +3,7 @@ import { ThemeProvider } from "styled-components";
 import Theme from "../theme/index";
 import GlobalStyles from "../theme/GlobalStyles";
 import { Guide } from "../types/guides";
+import { toggleMenu } from "../state/guides.slice";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import GuideRegister from "../components/GuideReguister";
@@ -11,10 +12,10 @@ import GuideList from "../components/GuideList";
 import Footer from "../components/Footer";
 import ModalHistory from "../components/Modals/ModalHistory";
 import ModalUpdate from "../components/Modals/ModalUpdate";
+import { useAppDispatch, useAppSelector } from "../hooks/useStoreTypes";
 
 const App = () => {
   //function to change display of menu to fixed or relative
-  const [menuDisplay, setMenuDisplay] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -108,13 +109,16 @@ const App = () => {
     },
   ]);
 
+  //Redux state
+  const dispatch = useAppDispatch();
+  const menuDisplay = useAppSelector((state) => state.guides.menuDisplay);
   //Function to listen the scroll event and change the display of the menu
   useEffect(() => {
     const changeDisplay = () => {
       if (window.scrollY > 165) {
-        setMenuDisplay(true);
+        dispatch(toggleMenu(true));
       } else {
-        setMenuDisplay(false);
+        dispatch(toggleMenu(false));
       }
     };
     window.addEventListener("scroll", changeDisplay);
@@ -141,13 +145,12 @@ const App = () => {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <Header ref={headerRef} menuDisplay={menuDisplay} />
+      <Header ref={headerRef} />
       <main ref={mainRef}>
         <Banner />
         <GuideRegister />
-        <GeneralState guides={guides} />
+        <GeneralState />
         <GuideList
-          guides={guides}
           setModalData={setModalData}
           setIsOpenModal={setIsOpenModal}
         />
