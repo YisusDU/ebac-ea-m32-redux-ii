@@ -4,21 +4,15 @@ import HistoryTable from "./HistoryTable";
 import HistoryPath from "./HistoryPath";
 import { useModalGuides } from "../../../hooks/useModalGuides";
 import { ModalHistoryContainer } from "./styles";
-import { ModalProp } from "../../../types/modals";
+import { useAppSelector } from "../../../hooks/useStoreTypes";
 
-const ModalHistory = ({
-  modalData,
-  guides,
-  isOpenModal,
-  setModalData,
-  setIsOpenModal,
-}: ModalProp) => {
-  const { guideIndex, currentGuide, cleanGuideData } = useModalGuides({
-    guides,
-    modalData,
-    setModalData,
-    setIsOpenModal,
-  });
+const ModalHistory = () => {
+  //Redux state typeModal
+  const isOpenModal = useAppSelector(
+    (state) => state.guides.modalData.typeModal
+  );
+
+  const { cleanGuideData } = useModalGuides();
 
   return (
     <ModalHistoryContainer
@@ -34,8 +28,8 @@ const ModalHistory = ({
       <h3 className="tableModal__title">Historial de envío</h3>
       <section className="tableModal__container">
         {/* Current info into a table */}
-        <HistoryTable guideIndex={guideIndex} currentGuide={currentGuide} />
-        <HistoryPath guideIndex={guideIndex} currentGuide={currentGuide} />
+        <HistoryTable />
+        <HistoryPath />
       </section>
     </ModalHistoryContainer>
   );

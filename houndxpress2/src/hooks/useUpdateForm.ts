@@ -1,12 +1,13 @@
 import { SetStateAction, useState } from "react";
 import validateFields from "./useValidateFields";
 import { Guide } from "../components/GuideReguister/types";
+import { useAppDispatch } from "./useStoreTypes";
+import { updateGuide } from "../state/guides.slice";
 
-const useUpdateForm = (
-  guideIndex: number,
-  currentGuide: Guide,
-  setGuides: React.Dispatch<SetStateAction<Guide[]>>
-) => {
+const useUpdateForm = () => {
+  //Redux state
+  const dispatch = useAppDispatch();
+
   //Set errors from the form
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -33,18 +34,9 @@ const useUpdateForm = (
       guide__hour: (formData.get("guide__hour") as string)?.trim() || "",
     };
 
-    /* console.log(newGuideStage); */
-
-    //Update the main table of guides
-    setGuides((prev) =>
-      prev.map((guide, idx) =>
-        idx === guideIndex
-          ? { ...guide, guide__stage: [...guide.guide__stage, newGuideStage] }
-          : guide
-      )
-    );
+    //Update with Redux
     alert("Guía registrada con éxito");
-
+    dispatch(updateGuide(newGuideStage));
     //clean the form
     form.reset();
   };

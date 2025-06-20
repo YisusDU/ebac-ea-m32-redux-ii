@@ -19,3 +19,6 @@ Primero creamos un archivo de typos llamado types.d.ts, dentro de la carpeta the
 --NOTA
     -He configurado el tsconfig.json para que reciba un atajo a la ruta src como @ lo que ahorra tener que hacer "../../../../."
     /*-/-He vuelto a la confiuracion anterior, por que create react app (CRA) no es compatible con @/ :,v
+
+--He aplicado correctamente Redux Toolkit al proyecto
+    --Podríamos implementar un selector para añadir filtros a GuideList

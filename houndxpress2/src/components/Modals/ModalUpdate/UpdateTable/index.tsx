@@ -2,13 +2,21 @@ import React from "react";
 import { Guide } from "../../../../types/guides";
 import { UpdateTableContainer } from "./styles";
 import useDraggTable from "../../../../hooks/useDraggTable";
+import { useAppSelector } from "../../../../hooks/useStoreTypes";
 
 export interface UpdateGuide {
   guideIndex: number;
   currentGuide: Guide;
 }
 
-const UpdateTable = ({ guideIndex, currentGuide }: UpdateGuide) => {
+const UpdateTable = () => {
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
+  const guideNumber = useAppSelector(
+    (state) => state.guides.modalData.guideNumber
+  );
+  const currentGuide = guides.find((g) => g.guide__number === guideNumber);
+
   //Function to dragg the table on scroll, it needs styles of overflow
   const tableRef = useDraggTable();
 
@@ -29,7 +37,7 @@ const UpdateTable = ({ guideIndex, currentGuide }: UpdateGuide) => {
           </tr>
         </thead>
         <tbody className="table__currentGuide--body">
-          {guideIndex !== -1 && currentGuide ? (
+          {currentGuide ? (
             <tr>
               <td>{currentGuide.guide__number}</td>
               <td>

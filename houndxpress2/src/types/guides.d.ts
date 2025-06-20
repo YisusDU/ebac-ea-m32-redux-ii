@@ -12,4 +12,3 @@ export interface GuideStage {
   guide__hour: string;
 }
 
-

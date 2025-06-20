@@ -11,6 +11,7 @@ import {
   ModalMessage,
 } from "./styles";
 import { useCleanErrorOnFocus } from "../../../../hooks/useCleanErrorOnFocus";
+import { useAppSelector } from "../../../../hooks/useStoreTypes";
 
 interface TypesUpdateForm {
   guideIndex: number;
@@ -18,16 +19,15 @@ interface TypesUpdateForm {
   setGuides: React.Dispatch<SetStateAction<Guide[]>>;
 }
 
-const UpdateForm = ({
-  guideIndex,
-  currentGuide,
-  setGuides,
-}: TypesUpdateForm) => {
-  const { handleValidate, errors, setErrors } = useUpdateForm(
-    guideIndex,
-    currentGuide,
-    setGuides
+const UpdateForm = () => {
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
+  const guideNumber = useAppSelector(
+    (state) => state.guides.modalData.guideNumber
   );
+  const currentGuide = guides.find((g) => g.guide__number === guideNumber);
+
+  const { handleValidate, errors, setErrors } = useUpdateForm();
   /* useEffect(()=> {
     console.log("currentGuideUpdate", currentGuide)
   }) */
@@ -80,7 +80,7 @@ const UpdateForm = ({
           </ModalSelect>
           <span className="error-message">{errors.guide__status}</span>
 
-          <label className="table__form--label" htmlFor="guide__date">
+          <label className="table__form--label" htmlFor="guide__newDate">
             Fecha de la última actualización:
           </label>
           <ModalInput

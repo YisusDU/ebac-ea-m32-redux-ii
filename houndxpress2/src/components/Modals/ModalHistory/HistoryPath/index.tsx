@@ -1,19 +1,23 @@
 import React from "react";
-import { HistoryGuide } from "../../../../types/modals";
 import Paw from "../../../../assets/IMG/paw-solid.svg";
 import {
   ModalHistoryPath,
   ModalPathContent,
   ModalSVGContainer,
 } from "./styles";
+import { useAppSelector } from "../../../../hooks/useStoreTypes";
 
-const HistoryPath = ({ guideIndex, currentGuide }: HistoryGuide) => {
+const HistoryPath = () => {
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
+  const guideNumber = useAppSelector(
+    (state) => state.guides.modalData.guideNumber
+  );
+  const currentGuide = guides.find((g) => g.guide__number === guideNumber);
   return (
     <section>
       {/* Dinamics paths of following  */}
-      {guideIndex !== -1 &&
-      currentGuide &&
-      currentGuide.guide__stage?.length >= 1 ? (
+      {currentGuide && currentGuide.guide__stage?.length >= 1 ? (
         <>
           {currentGuide?.guide__stage.map((stage, idx) => (
             <ModalHistoryPath key={idx}>

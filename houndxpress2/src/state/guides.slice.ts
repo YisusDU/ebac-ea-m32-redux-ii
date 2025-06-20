@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GuidesState } from "./types";
+import { GuidesState, InfoModalData } from "./types";
 import { Guide } from "../types/guides";
+import { GuideStage } from "../components/GuideReguister/types";
 
 //Global Initial State
 const initialState: GuidesState = {
@@ -92,6 +93,7 @@ const initialState: GuidesState = {
     },
   ],
   menuDisplay: false,
+  modalData: { guideNumber: "", typeModal: "" },
 };
 
 const guidesSlice = createSlice({
@@ -101,14 +103,26 @@ const guidesSlice = createSlice({
     addGuide: (state, action: PayloadAction<Guide>) => {
       state.guides.unshift(action.payload);
     },
+    updateGuide: (state, action: PayloadAction<GuideStage>) => {
+      const guide = state.guides.find(
+        (g) => g.guide__number == state.modalData.guideNumber
+      );
+      if (guide) {
+        guide.guide__stage.push(action.payload);
+      }
+    },
     toggleMenu: (state, action: PayloadAction<boolean>) => {
       state.menuDisplay = action.payload;
+    },
+    changeModalData: (state, action: PayloadAction<InfoModalData>) => {
+      state.modalData = action.payload;
     },
   },
 });
 
 //Actions by name
-export const { addGuide, toggleMenu } = guidesSlice.actions;
+export const { addGuide, toggleMenu, changeModalData, updateGuide } =
+  guidesSlice.actions;
 
 //Reducer for the store
 export default guidesSlice.reducer;

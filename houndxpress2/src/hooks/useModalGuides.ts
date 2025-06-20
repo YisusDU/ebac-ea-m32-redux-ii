@@ -1,24 +1,17 @@
-import { ModalGuidesProps } from "../types/modals";
+import { changeModalData } from "../state/guides.slice";
+import { useAppDispatch, useAppSelector } from "./useStoreTypes";
 
-const useModalGuides = ({
-  guides,
-  modalData,
-  setModalData,
-  setIsOpenModal,
-}: ModalGuidesProps) => {
-  //Find the index of the guide loaded on the state modalData
-  const guideIndex = guides.findIndex(
-    (guide) => String(guide.guide__number.trim()) === String(modalData.trim())
-  );
+const useModalGuides = () => {
+  //Redux state
+  const modalData = useAppSelector((state) => state.guides.modalData);
+  const dispatch = useAppDispatch();
 
-  //select the guide on question of all the guides
-  const currentGuide = guides[guideIndex];
-
+  //Clean Redux state modalData
   const cleanGuideData = () => {
-    setModalData("");
-    setIsOpenModal("");
+    //Redux dispatch
+    dispatch(changeModalData({ guideNumber: "", typeModal: "" }));
   };
-  return { guideIndex, currentGuide, cleanGuideData };
+  return { cleanGuideData };
 };
 
 export { useModalGuides };

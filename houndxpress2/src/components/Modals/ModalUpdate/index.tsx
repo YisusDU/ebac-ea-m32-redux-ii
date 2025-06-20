@@ -5,6 +5,7 @@ import UpdateForm from "./UpdateForm";
 import { Guide } from "../../../types/guides";
 import { useModalGuides } from "../../../hooks/useModalGuides";
 import XIcon from "../../../assets/IMG/x-solid.svg";
+import { useAppSelector } from "../../../hooks/useStoreTypes";
 
 export interface ModalUpdateProp {
   modalData: string;
@@ -15,20 +16,13 @@ export interface ModalUpdateProp {
   setIsOpenModal: React.Dispatch<SetStateAction<"Update" | "History" | "">>;
 }
 
-const ModalUpdate = ({
-  modalData,
-  guides,
-  setGuides,
-  isOpenModal,
-  setModalData,
-  setIsOpenModal,
-}: ModalUpdateProp) => {
-  const { guideIndex, currentGuide, cleanGuideData } = useModalGuides({
-    guides,
-    modalData,
-    setModalData,
-    setIsOpenModal,
-  });
+const ModalUpdate = () => {
+  //Redux state typeModal
+  const isOpenModal = useAppSelector(
+    (state) => state.guides.modalData.typeModal
+  );
+
+  const { cleanGuideData } = useModalGuides();
 
   return (
     <ModalUpdateContainer
@@ -40,12 +34,8 @@ const ModalUpdate = ({
         <img src={XIcon} alt="close--modal" onClick={cleanGuideData} />
       </i>
       <h3 className="tableModal__title">Actualizar estado del envío</h3>
-      <UpdateTable guideIndex={guideIndex} currentGuide={currentGuide} />
-      <UpdateForm
-        guideIndex={guideIndex}
-        currentGuide={currentGuide}
-        setGuides={setGuides}
-      />
+      <UpdateTable />
+      <UpdateForm />
     </ModalUpdateContainer>
   );
 };

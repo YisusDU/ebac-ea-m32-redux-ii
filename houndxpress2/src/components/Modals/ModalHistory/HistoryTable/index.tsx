@@ -1,9 +1,15 @@
 import React from "react";
 import useDraggTable from "../../../../hooks/useDraggTable";
 import { HistoryTableContainer } from "./styles";
-import { HistoryGuide } from "../../../../types/modals";
+import { useAppSelector } from "../../../../hooks/useStoreTypes";
 
-const HistoryTable = ({ guideIndex, currentGuide }: HistoryGuide) => {
+const HistoryTable = () => {
+  //Redux state
+  const guides = useAppSelector((state) => state.guides.guides);
+  const guideNumber = useAppSelector(
+    (state) => state.guides.modalData.guideNumber
+  );
+  const currentGuide = guides.find((g) => g.guide__number === guideNumber);
   //Function to dragg the table on scroll, it needs styles of overflow
   const tableRef = useDraggTable();
 
@@ -20,7 +26,7 @@ const HistoryTable = ({ guideIndex, currentGuide }: HistoryGuide) => {
           </tr>
         </thead>
         <tbody className="tableHistory__currentGuide--body">
-          {guideIndex !== -1 && currentGuide ? (
+          {currentGuide ? (
             <tr>
               <td>{currentGuide.guide__number}</td>
               <td>

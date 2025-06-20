@@ -11,7 +11,7 @@ import {
   HeaderLinksContainer,
 } from "./styles";
 
-const Header = forwardRef<HTMLDivElement>(({}, ref) => {
+const Header = forwardRef<HTMLElement>(({}, ref) => {
   /* ------------Banner */
   // State to manage the visibility of the menu
   const [openMenu, setOpenMenu] = useState(false);
