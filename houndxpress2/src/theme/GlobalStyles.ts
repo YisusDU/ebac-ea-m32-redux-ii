@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
         min-width: 19rem !Important;
     }
     body{
-        font-family: ${(props) => props.theme.fonts.base}
+        font-family: ${(props) => props.theme.fonts.base};
         scroll-behavior: smooth;
         margin: 0;
         padding: 0;

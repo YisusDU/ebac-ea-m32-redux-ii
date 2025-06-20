@@ -43,6 +43,30 @@ const GuideListContainer = styled.article`
   }
 `;
 
+const GuideFilter = styled.form`
+  ${flex("row", "center", "space-evenly")}
+  background-color: ${secondaryColor};
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px;
+  gap: 10px;
+
+  label {
+    font-size: clamp(0.8rem, 1rem, 1.2rem);
+  }
+
+  select {
+    font-size: clamp(0.8rem, 1rem, 1.2rem);
+    ${colorBg("#fff", secondaryColor)}
+  }
+
+  button {
+    font-size: clamp(0.8rem, 1rem, 1.2rem);
+    padding: 2px;
+    ${colorBg()}
+  }
+`;
+
 const GuideTable = styled.table`
   width: 100%;
   border-spacing: 2px;
@@ -96,6 +120,7 @@ const TableButtonsContainer = styled.td`
 
 export {
   GuideListContainer,
+  GuideFilter,
   GuideTable,
   TableHeader,
   TableData,
